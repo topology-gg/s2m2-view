@@ -1,11 +1,8 @@
-import { MongoClient } from 'mongodb'
+import clientPromise from '../../lib/mongodb'
 
-const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING
-
-const client = new MongoClient(MONGO_CONNECTION_STRING)
 
 export default async function handler(req, res) {
-    await client.connect()
+    const client = await clientPromise
 
     const db = client.db('s2m2')
     const puzzles = await db
